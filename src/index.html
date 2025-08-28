@@ -7,18 +7,23 @@
         <link rel="stylesheet" href="./styles.css" />
     </head>
     <body>
-        <div class="header"><span class="buttons" title="Authored by Miroshnichenko Alexey">🎰</span></div>
-
-        <div class="container">
-            <div class="showcase first"></div>
-            <div class="showcase second"></div>
-            <div class="showcase third"></div>
+        <div class="welcome-screen">
+            <p>Азартные игры - не игрушка!<br/>Хотите начать?</p>
+            <button id="confirm-playing">Да</button>
         </div>
 
-        <div class="reload"><span class="buttons reload-span-button" title="Крутить ещё!">↺</span></div>
+        <div class="container">
+            <div class="header"><span class="buttons" title="Authored by Miroshnichenko Alexey">🎰</span></div>
+            <div class="slots-container">
+                <div class="showcase first"></div>
+                <div class="showcase second"></div>
+                <div class="showcase third"></div>
+            </div>
+            <div class="reload"><span class="buttons reload-span-button" title="Крутить ещё!">↺</span></div>
+        </div>
+        <audio id="starting-audio" src="/src/assets/zvuk-vrascheniya.mp3"></audio>
+        <audio id="ending-audio" src="/src/assets/zvuk-kontsa-vrascheniya.mp3"></audio>
 
-
-        <script src="./index.js"></script>
-
+        <script src="/src/index.js"></script>
     </body>
 </html>

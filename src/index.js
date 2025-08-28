@@ -23,21 +23,26 @@ function emojiCode() {
         pushEmoji(emojiList3);
     } while (emojiList1.length < 100);
 
-    document.querySelector(".first").innerHTML = `
-        <div class="in-showcase">
-            ${emojiList1.map(e => `<span>${e}</span>`).join("")}
-        </div>
-    `;
-    document.querySelector(".second").innerHTML = `
-        <div class="in-showcase">
-            ${emojiList2.map(e => `<span>${e}</span>`).join("")}
-        </div>
-    `;
-    document.querySelector(".third").innerHTML = `
-        <div class="in-showcase">
-            ${emojiList3.map(e => `<span>${e}</span>`).join("")}
-        </div>
-    `;
+    [".first", ".second", ".third"].forEach((cls, idx) => {
+        const list = [emojiList1, emojiList2, emojiList3][idx];
+        document.querySelector(cls).innerHTML = `
+            <div class="in-showcase">
+                ${list.map(e => `<span>${e}</span>`).join("")}
+            </div>
+        `;
+    });
+
+    const showcase = document.querySelector(".third");
+    const startingAudio = document.getElementById("starting-audio");
+    showcase.addEventListener("animationstart", () => {
+        startingAudio.currentTime = 0;
+        startingAudio.play();
+    });
+    showcase.addEventListener("animationend", () => {
+        startingAudio.pause();
+        startingAudio.currentTime = 0;
+        document.getElementById("ending-audio").play();
+    });
 }
 
 const reloadButton = document.querySelector(".reload-span-button");
@@ -45,14 +50,27 @@ reloadButton.addEventListener("click", function (event) {
     event.preventDefault();
 
     clearEmojiesInDOM();
-    document.querySelector(".container").innerHTML = `
+    document.querySelector(".slots-container").innerHTML = `
         <div class="showcase first"></div>
         <div class="showcase second"></div>
         <div class="showcase third"></div>
     `;
     emojiCode();
 });
-
-document.addEventListener("DOMContentLoaded", emojiCode);
-
-https://ru.pikbest.com/sound-effects/sound-effects-of-bonus-coins-in-slot-machines_1157389.html
+document.addEventListener("DOMContentLoaded", () => {
+    
+    document.getElementById("confirm-playing").addEventListener("click", () => {
+        const startingAudio = document.getElementById("starting-audio");
+        startingAudio.currentTime = 0;
+        startingAudio.play();
+        
+        emojiCode();
+        
+        const welcomeScreen = document.querySelector(".welcome-screen");
+        welcomeScreen.classList.add("fade-out");
+        welcomeScreen.addEventListener("animationend", () => {
+            welcomeScreen.style.display = "none";
+        })
+        
+    }, { once: true });
+});
