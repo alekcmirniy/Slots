@@ -1,0 +1,83 @@
+body {
+    background: #092f3b;
+    text-align: center;
+    display: flex;
+    place-self: center;
+    flex-direction: column;
+}
+* {
+    box-sizing: border-box;
+}
+.container {
+    width: 600px;
+    height: 150px;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #384b6d 1%, #9b2a91 65%);
+    box-shadow: 10px 10px 50px rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+.header,
+.reload {
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    line-height: 80px;
+    background: #353a68;
+    margin: 0 auto 0;
+    box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.2);
+}
+.header {
+    border-radius: 20px 20px 0 0;
+    cursor: default;
+    border-bottom: 1px solid gray;
+}
+.reload {
+    border-radius: 0 0 20px 20px;
+    border-top: 1px solid gray;
+}
+.buttons {
+    display: inline-block;
+}
+.buttons:hover {
+    transform: scale(1.25);
+    transitioN: all ease 0.2s;
+}
+.reload .buttons {
+    cursor: pointer;
+}
+.showcase {
+    position: absolute;
+    width: 200px;
+    height: 1800%;
+    overflow: hidden;
+    animation: showcase 1s linear 2;
+}
+@keyframes showcase {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: -1600%;
+    }
+}
+.in-showcase {
+    width: 200px;
+    font-size: 130px;
+    overflow: hidden;
+    line-height: 150px;
+    cursor: default;
+}
+.first {
+    left: 0;
+    animation-delay: -0.5s;
+    border-right: 1px solid gray;
+}
+.second {
+    left: 200px;
+    animation-delay: -0.2s;
+    border-right: 1px solid gray;
+}
+.third {
+    left: 400px;
+    animation-delay: 0s;
+}
