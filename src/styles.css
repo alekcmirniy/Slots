@@ -45,10 +45,16 @@ body {
   color: inherit;
   box-shadow: 1px 1px 20px black;
   padding: 12px;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, opacity 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
 .welcome-screen button:hover {
   transform: scale(1.1);
+}
+.welcome-screen button:disabled {
+  color: #d2d5db;
+  background: #6c7589;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .fade-out {

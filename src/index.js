@@ -10,6 +10,9 @@ function pushEmoji(emojiList) {
 function clearEmojiesInDOM() {
     document.querySelectorAll(".in-showcase").forEach(el => el.remove());
 }
+
+let audioCanStart = false;
+
 function emojiCode() {
     clearEmojiesInDOM();
 
@@ -31,22 +34,30 @@ function emojiCode() {
             </div>
         `;
     });
-
-    const showcase = document.querySelector(".third");
+    const showcase = document.querySelector(".third")
     const startingAudio = document.getElementById("starting-audio");
-    showcase.addEventListener("animationstart", () => {
-        startingAudio.currentTime = 0;
-        startingAudio.play();
-    });
-    showcase.addEventListener("animationend", () => {
-        startingAudio.pause();
-        startingAudio.currentTime = 0;
-        document.getElementById("ending-audio").play();
-    });
+    const handleAnimationStart = () => {
+        if (audioCanStart) {
+            startingAudio.currentTime = 0;
+            startingAudio.play().catch(e => console.log(e.message));
+        }
+    }
+    const handleAnimationEnd = () => {
+        if (audioCanStart) {
+            startingAudio.pause();
+            startingAudio.currentTime = 0;
+            document.getElementById("ending-audio").play();
+
+        }
+    }
+    showcase.removeEventListener("animationstart", handleAnimationStart);
+    showcase.removeEventListener("animationend", handleAnimationEnd);
+
+    showcase.addEventListener("animationstart", handleAnimationStart);
+    showcase.addEventListener("animationend", handleAnimationEnd);
 }
 
-const reloadButton = document.querySelector(".reload-span-button");
-reloadButton.addEventListener("click", function (event) {
+document.querySelector(".reload-span-button").addEventListener("click", function (event) {
     event.preventDefault();
 
     clearEmojiesInDOM();
@@ -57,20 +68,45 @@ reloadButton.addEventListener("click", function (event) {
     `;
     emojiCode();
 });
+
 document.addEventListener("DOMContentLoaded", () => {
+    const startingAudio = document.getElementById("starting-audio");
+    startingAudio.volume = 0.35;
+
+
+    document.addEventListener("visibilitychange", () => {
+        const animations = document.getAnimations().filter(anim => (anim.effect.target.classList.contains('showcase')));
+        if (document.hidden) {
+            startingAudio.pause();
+            animations.forEach(anim => anim.pause());
+        }
+        else {
+            if (startingAudio.paused 
+                && audioCanStart
+                && animations.some((anim) => (anim.playState !== "finished"))) {
+                    startingAudio.play();
+                }
+            animations.forEach(anim => anim.play());
+        }
+    })
     
-    document.getElementById("confirm-playing").addEventListener("click", () => {
-        const startingAudio = document.getElementById("starting-audio");
+    const btn = document.getElementById("confirm-playing");
+    if (btn) {
+        setTimeout(() => {
+            btn.removeAttribute("disabled");
+        }, 2000);
+    }
+    console.log(audioCanStart)
+    btn.addEventListener("click", () => {
         startingAudio.currentTime = 0;
-        startingAudio.play();
-        
+        audioCanStart = true;
         emojiCode();
-        
+
         const welcomeScreen = document.querySelector(".welcome-screen");
         welcomeScreen.classList.add("fade-out");
         welcomeScreen.addEventListener("animationend", () => {
             welcomeScreen.style.display = "none";
         })
-        
+        console.log(audioCanStart);
     }, { once: true });
 });

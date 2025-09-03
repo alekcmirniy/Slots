@@ -5,11 +5,12 @@
         <meta charset="UTF8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./styles.css" />
+        <link rel="icon" href="./assets/favicon.png" type="image/png" />
     </head>
     <body>
         <div class="welcome-screen">
             <p>Азартные игры - не игрушка!<br/>Хотите начать?</p>
-            <button id="confirm-playing">Да</button>
+            <button disabled id="confirm-playing">Да</button>
         </div>
 
         <div class="container">
@@ -19,7 +20,7 @@
                 <div class="showcase second"></div>
                 <div class="showcase third"></div>
             </div>
-            <div class="reload"><span class="buttons reload-span-button" title="Крутить ещё!">↺</span></div>
+            <div class="reload"><span class="buttons reload-span-button" title="Крутить!">↺</span></div>
         </div>
         <audio id="starting-audio" src="/src/assets/zvuk-vrascheniya.mp3"></audio>
         <audio id="ending-audio" src="/src/assets/zvuk-kontsa-vrascheniya.mp3"></audio>
