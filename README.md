@@ -1,4 +1,5 @@
 # Slots
+<img width="1625" height="766" alt="{54BF6C12-EE1A-4692-B964-8B8084CDE087}" src="https://github.com/user-attachments/assets/7e7fd33c-ff98-4c0c-8f2c-ba48a62128b2" />
 
 Кратко: Простая браузерная слот-машина на JavaScript с анимацией и звуковыми эффектами.
 
